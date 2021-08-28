@@ -1,0 +1,23 @@
+Using Newman with the Postman API
+1 Generate an API key
+2 Fetch a list of your collections from: https://api.getpostman.com/collections?apikey=$apiKey
+3 Get the collection link via it's uid: https://api.getpostman.com/collections/$uid?apikey=$apiKey
+4 Obtain the environment URI from: https://api.getpostman.com/environments?apikey=$apiKey
+5 Using the collection and environment URIs acquired in steps 3 and 4, run the collection as follows:
+
+$ newman run "https://api.getpostman.com/collections/$uid?apikey=$apiKey" \
+    --environment "https://api.getpostman.com/environments/$uid?apikey=$apiKey"
+
+
+Reporters
+Configuring Reporters
+-r <reporter-name>, --reporters <reporter-name>
+Specify one reporter name as string or provide more than one reporter name as a comma separated list of reporter names. Available reporters are: cli, json, junit, progress and emojitrain.
+
+Spaces should not be used between reporter names / commas whilst specifying a comma separated list of reporters. For instance:
+
+✅ -r cli,json,junit
+❌ -r cli , json,junit
+
+newman run "https://api.getpostman.com/collections/5ec55678-ab88-45df-8393-e12af3dd587c?apikey=PMAK-612449155a2fa5004d226526-ad60c11e527306f613c45f990d5471d421" --environment "https://api.getpostman.com/environments/81b5bb85-7449-4cef-a137-76ac4a9b9ab9?apikey=PMAK-612449155a2fa5004d226526-ad60c11e527306f613c45f990d5471d421" --disable-unicode
+ --reporters cli,junit,htmlextra --reporter-htmlextra-export "newman/report.html" --reporter-junit-export "newman/report.xml"
